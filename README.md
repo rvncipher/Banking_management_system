@@ -157,3 +157,37 @@ Then **Loan CRUD → List loans**.
 - `com.lpu.repository` -> `BankRepository`, `BranchRepository`, `CustomerRepository`, `AccountRepository`, `LoanRepository`
 - `com.lpu.mainmenu` -> `MainMenu` (switch-based console UI)
 - `com.lpu.database` -> `HibernateConnection` (EntityManagerFactory + EntityManager)
+
+## Future implementations (easy upgrades)
+
+These are good “next steps” you can add later to make it feel more like a real system.
+
+### Menu improvements
+- Add “attach existing customer to existing account”
+- Add “attach existing customer to existing loan”
+- Add “list branches by bank” (choose bank id → show its branches)
+- Add “list customers by branch”, “list accounts by customer”, “list loans by account”
+
+### Validation & safety
+- Validate inputs (no negative balances/loan amounts, valid IFSC format, email format)
+- Better error messages for duplicate values (unique constraints)
+- Prevent deleting a bank if it still has branches (or ask for confirmation)
+
+### Banking features
+- Deposit / withdraw
+- Transfer money between two accounts (single transaction)
+- Account status: `ACTIVE`, `BLOCKED`, `CLOSED`
+
+### Loan features
+- Loan status: `PENDING`, `APPROVED`, `REJECTED`, `CLOSED`
+- EMI schedule, interest rate, tenure
+- Repay loan from an account (reduce outstanding amount)
+
+### Data model upgrades
+- Add audit fields: `createdAt`, `updatedAt`
+- Add soft delete (e.g., `isActive` flag) instead of hard deletes
+- Add enums for loan type / account type instead of raw strings
+
+### Repository improvements
+- Add search methods (find by code, find by IFSC, find by email, find by account number)
+- Add pagination for list screens when data grows
